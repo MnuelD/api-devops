@@ -30,8 +30,8 @@ pipeline {
                 -p %DB_PORT%:3306 ^
                 mysql:8.0
                 """
-                // Espera MySQL ficar disponível
-                bat 'timeout /t 20'
+                // Pausa de 30 segundos para o MySQL subir
+                powershell 'Start-Sleep -Seconds 30'
             }
         }
 
