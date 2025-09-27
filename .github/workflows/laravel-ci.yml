@@ -37,20 +37,20 @@ jobs:
           extensions: mbstring, pdo, pdo_mysql, bcmath, intl
           coverage: none
 
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
+      - name: Install Composer dependencies
+        run: cd src && composer install --prefer-dist --no-progress
 
       - name: Copy .env
-        run: cp .env.example .env
+        run: cd src && cp .env.example .env
 
-      - name: Generate key
-        run: php artisan key:generate
+      - name: Generate application key
+        run: cd src && php artisan key:generate
 
-      - name: Run migrations
-        run: php artisan migrate --force
+      - name: Run database migrations
+        run: cd src && php artisan migrate --force
 
       - name: Run Unit Tests
-        run: php artisan test --testsuite=Unit
+        run: cd src && php artisan test --testsuite=Unit
 
-      - name: Run Feature Tests (Controllers & Integration)
-        run: php artisan test --testsuite=Feature
+      - name: Run Feature Tests
+        run: cd src && php artisan test --testsuite=Feature
