@@ -10,20 +10,16 @@ pipeline {
 
         stage('Install dependencies') {
             steps {
-                dir('src') {
-                    sh 'composer install --prefer-dist --no-interaction --no-progress'
-                    sh 'cp .env.example .env || true'
-                    sh 'php artisan key:generate'
-                }
+                sh 'composer install --prefer-dist --no-interaction --no-progress'
+                sh 'cp .env.example .env || true'
+                sh 'php artisan key:generate'
             }
         }
 
         stage('Run Tests') {
             steps {
-                dir('src') {
-                    sh 'php artisan migrate:fresh --seed'
-                    sh 'php artisan test'
-                }
+                sh 'php artisan migrate:fresh --seed'
+                sh 'php artisan test'
             }
         }
 

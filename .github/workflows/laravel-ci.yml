@@ -38,19 +38,19 @@ jobs:
           coverage: none
 
       - name: Install Composer dependencies
-        run: cd src && composer install --prefer-dist --no-progress
+        run: composer install --prefer-dist --no-progress
 
       - name: Copy .env
-        run: cd src && cp .env.example .env
+        run: cp .env.example .env
 
       - name: Generate application key
-        run: cd src && php artisan key:generate
+        run: php artisan key:generate
 
       - name: Run database migrations
-        run: cd src && php artisan migrate --force
+        run: php artisan migrate --force
 
       - name: Run Unit Tests
-        run: cd src && php artisan test --testsuite=Unit
+        run: php artisan test --testsuite=Unit
 
       - name: Run Feature Tests
-        run: cd src && php artisan test --testsuite=Feature
+        run: php artisan test --testsuite=Feature
